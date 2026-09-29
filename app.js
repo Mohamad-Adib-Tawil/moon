@@ -8,6 +8,12 @@
   const { baby, parents, reception: r } = c;
   if (baby.gender) document.body.classList.add(`tint-${baby.gender}`);
   document.title = `بشارة مولود — ${baby.nameArabic}`;
+  const metaTitle = document.querySelector('meta[property="og:title"]');
+  const metaDescription = document.querySelector('meta[property="og:description"]');
+  const metaImage = document.querySelector('meta[property="og:image"]');
+  if (metaTitle) metaTitle.content = document.title;
+  if (metaDescription) metaDescription.content = `بشرى سارة بقدوم ${baby.nameArabic}`;
+  if (metaImage && c.assets?.coverShareImage) metaImage.content = new URL(c.assets.coverShareImage, window.location.href).href;
   text("babyName", baby.nameArabic); text("babyNameEnglish", baby.nameEnglish); text("heroGreet", `أهلاً بـ ${baby.nameArabic}`); text("birthDate", `تاريخ الميلاد: ${baby.birthDateText}`);
   text("parentsLine", `بفرحٍ من والديه ${parents.father} و${parents.mother}`);
   text("invitationText", r.invitationText); text("venueDate", r.dateText); text("venueTime", r.timeText); text("venueName", r.venueName); text("venueAddr", r.venueAddress); text("closingNote", r.closingNote); text("closingHashtag", r.hashtag); text("closingHost", `بدعوة من ${parents.family}`);
